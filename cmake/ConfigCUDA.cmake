@@ -21,10 +21,10 @@ list(GET CUDA_VERSION_LIST 2 CUDA_VERSION_PATCH)
 find_package(CUDAToolkit ${CUDA_VERSION_MAJOR}.${CUDA_VERSION_MINOR} REQUIRED)
 
 # CUDA version requirement:
-# - to use gcc-11 (11.7)
+# - to use gcc-11 (11.6)
 
-if(CMAKE_CUDA_COMPILER_VERSION VERSION_LESS "11.7")
-    message(FATAL_ERROR "Minimum CUDA version supported is 11.7")
+if(CMAKE_CUDA_COMPILER_VERSION VERSION_LESS "11.6")
+    message(FATAL_ERROR "Minimum CUDA version supported is 11.6")
 endif()
 
 set(CMAKE_CUDA_STANDARD ${CMAKE_CXX_STANDARD})
@@ -43,6 +43,7 @@ if(NOT USE_CMAKE_CUDA_ARCHITECTURES)
     else()
         # All architectures we build sass for
         list(APPEND CMAKE_CUDA_ARCHITECTURES
+            61-real # Pascal - gp10x/GeForce
              70-real # Volta  - gv100/Tesla
              75-real # Turing - tu10x/GeForce
              80-real # Ampere - ga100/Tesla

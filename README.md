@@ -1,5 +1,57 @@
 # CV-CUDA
 
+CV-CUDA(0.5.0) for Pascal(sm6.1) and lower version gcc
+
+## build
+  
+```shell  
+git clone git@github.com:torchpipe/CV-CUDA.git
+git submodule update --init
+
+img_name=nvcr.io/nvidia/cuda:11.6.2-cudnn8-devel-ubuntu20.04
+
+docker run  --name=cvcuda_fork   --network=host --gpus=all  --ulimit memlock=-1 --ulimit stack=67108864  --privileged=true  -v `pwd`:/workspace  -w/workspace  -it $img_name  /bin/bash 
+```
+
+  and then
+
+```
+source build_env.sh
+./ci/build.sh
+
+ls -alh build-rel/lib/
+
+```
+
+(optinal) pack
+```
+cd build-rel
+cpack . -G TXZ
+
+ls -alh nvcv-*
+    
+```
+
+
+## direct download
+
+see https://github.com/torchpipe/CV-CUDA/releases
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+original readme
+--------------------------------------------------------------------------
 [![License](https://img.shields.io/badge/License-Apache_2.0-yellogreen.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ![Version](https://img.shields.io/badge/Version-v0.5.0--beta-blue)

@@ -67,7 +67,8 @@ mkdir -p "$build_dir"
 # Set build configuration depending on build type ====================
 
 # Common config
-cmake_args="-DBUILD_TESTS=1"
+cmake_args="-DBUILD_TESTS=0"
+ENABLE_PYTHON=0
 
 if [[ "$ENABLE_PYTHON" = '0' || "$ENABLE_PYTHON" = 'no' ]]; then
     cmake_args="$cmake_args -DBUILD_PYTHON=0"
@@ -94,9 +95,9 @@ esac
 
 # Configure build toolchain ===========================================
 
-# Make sure we use most recent gcc-11.x
-CC=${CC:=$(find /usr/bin/gcc-11* | sort -rV | head -n 1)}
-CXX=${CXX:=$(find /usr/bin/g++-11* | sort -rV | head -n 1)}
+# Make sure we use most recent gcc-9.x
+CC=${CC:=$(find /usr/bin/gcc-9* | sort -rV | head -n 1)}
+CXX=${CXX:=$(find /usr/bin/g++-9* | sort -rV | head -n 1)}
 
 cmake_args="${cmake_args} -DCMAKE_C_COMPILER=$CC -DCMAKE_CXX_COMPILER=$CXX"
 
@@ -130,7 +131,7 @@ done
 
 # Create build tree
 cmake -B "$build_dir" "$source_dir"  \
-    -DBUILD_TESTS=1 \
+    -DBUILD_TESTS=0 \
     $cmake_args \
     $user_args
 
