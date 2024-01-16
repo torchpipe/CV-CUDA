@@ -1,9 +1,12 @@
 # CV-CUDA
 
-CV-CUDA(0.5.0) for Pascal(sm6.1) and lower version gcc
+CV-CUDA(0.5.0) for Pascal(sm>=6.1) and lower version gcc
+> Note : Not all CUDA code is guaranteed to run properly on sm61. Please verify before use. The following function list cannot be used under sm61:
+- (need add here)
 
 ## build
   
+  ### Step 1
 ```shell  
 git clone git@github.com:torchpipe/CV-CUDA.git
 git submodule update --init
@@ -13,7 +16,7 @@ img_name=nvcr.io/nvidia/cuda:11.6.2-cudnn8-devel-ubuntu20.04
 docker run  --name=cvcuda_fork   --network=host --gpus=all  --ulimit memlock=-1 --ulimit stack=67108864  --privileged=true  -v `pwd`:/workspace  -w/workspace  -it $img_name  /bin/bash 
 ```
 
-  and then
+  ### Step 2
 
 ```
 source build_env.sh
@@ -23,7 +26,7 @@ ls -alh build-rel/lib/
 
 ```
 
-(optinal) pack
+  ### Step 3 (optinal) pack
 ```
 cd build-rel
 cpack . -G TXZ
@@ -37,7 +40,7 @@ ls -alh nvcv-*
 
 see https://github.com/torchpipe/CV-CUDA/releases
 
-
+CV-CUDA was used by torchpipe with concurrent cuda streams and libtorch Interface.
 
 
 
